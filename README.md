@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
+This project incorporates the EventTrackerProject as the backend for the data. The event tracker app will record cycling events and these events include the time, date and distance of each cycling event. Users may add new cycling events, delete existing events and update an existing event. 
+
+The backend portion of this application utilizes a RESTful API to receive and submit data.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
