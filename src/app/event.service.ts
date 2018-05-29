@@ -10,10 +10,12 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class EventService {
 
-  private url = 'http://localhost:8080/api/rides/';
+  // private url = 'http://localhost:8080/api/rides/';
+  private baseUrl = '/CyclingRest/';
+  private supUrl = 'api/rides/';
 
   index() {
-    return this.http.get<Event[]>(this.url).pipe(
+    return this.http.get<Event[]>(this.baseUrl + this.supUrl).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Index Error');
@@ -22,7 +24,7 @@ export class EventService {
   }
 
   create(event) {
-    return this.http.post<Event>(this.url, event).pipe(
+    return this.http.post<Event>(this.baseUrl + this.supUrl, event).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Create Error');
@@ -31,7 +33,7 @@ export class EventService {
   }
 
   delete(id) {
-    return this.http.delete(this.url + id).pipe(
+    return this.http.delete(this.baseUrl + this.supUrl + id).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Delete Error');
@@ -40,7 +42,7 @@ export class EventService {
   }
 
   update(id, event) {
-    return this.http.put(this.url + id, event).pipe(
+    return this.http.put(this.baseUrl + this.supUrl + id, event).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Update Error');
