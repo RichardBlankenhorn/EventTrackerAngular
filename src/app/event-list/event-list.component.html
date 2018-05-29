@@ -1,0 +1,95 @@
+<h1 align='center' >{{title}}
+    <span class='badge badge-info'>{{getNumOfEvents()}}</span>
+</h1>
+
+<!-- Container For HTML -->
+<div class='container'>
+  <!-- Display Events -->
+  <table *ngIf='!selected' class='table table-bordered table-hover'>
+    <thead class='thead-dark'>
+      <tr>
+        <th class="thead-dark">ID</th>
+        <th>Time</th>
+        <th>Date</th>
+        <th>Distance</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tr *ngFor='let e of events'>
+      <td (click)='displayEvent(e)'>{{e.id}}</td>
+      <td (click)='displayEvent(e)'>{{e.time}}</td>
+      <td (click)='displayEvent(e)'>{{e.date}}</td>
+      <td (click)='displayEvent(e)'>{{e.distance}}</td>
+      <td (click)='delete(e.id)' type='submit' class='close' ariel-label='Close' style='color: red; float:left'>
+          <span aria-hidden="true">&times;</span>
+      </td>
+    </tr>
+  </table>
+  <!-- End Display Events -->
+
+  <!-- Create New Event -->
+  <div *ngIf='!selected'>
+      <div class='row'>
+        <div class='col'>
+          <label for="time">Time</label>
+          <input type="number" class='form-control' id='time' placeholder='time' [(ngModel)]='event.time'>
+        </div>
+        <div class='col'>
+          <label for="date">Date</label>
+          <input type="date" class='form-control' id='date' placeholder='date' [(ngModel)]='event.date'>
+        </div>
+        <div class='col'>
+          <label for="distance">Distance</label>
+          <input type="number" class='form-control' id='distance' placeholder='distance' [(ngModel)]='event.distance'>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col'>
+            <br>
+            <button type="submit" class='btn btn-success' (click)='create(); '>Add New Event</button>
+        </div>
+      </div>
+    </div>
+    <!-- End Create New Event -->
+
+    <!-- Display Single Event -->
+    <div *ngIf='selected && !edit' align='center' id='singleDisplay'>
+        <h4>{{selected.id}}</h4>
+        <h4>{{selected.time}}</h4>
+        <h4>{{selected.date}}</h4>
+        <h4>{{selected.distance}}</h4>
+        <button (click)='edit = true' type='button' class='btn btn-primary' style='margin-right: 10px'>Edit</button>
+        <button (click)='displayTable()'  type="button" class="btn btn-primary">Return</button>
+    </div>
+    <!-- End Display Single Event -->
+
+    <!-- Update Event -->
+    <div *ngIf='edit' align='center' id='edit'>
+        <div class='row'>
+            <div class='col'>
+              <label for="time">Time</label>
+              <input type="number" class='form-control' id='time' placeholder='time' [(ngModel)]='selected.time'>
+            </div>
+            <div class='col'>
+              <label for="date">Date</label>
+              <input type="date" class='form-control' id='date' placeholder='date' [(ngModel)]='selected.date'>
+            </div>
+            <div class='col'>
+              <label for="distance">Distance</label>
+              <input type="number" class='form-control' id='distance' placeholder='distance' [(ngModel)]='selected.distance'>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col'>
+              <br>
+              <button type="submit" class='btn btn-success' (click)='update(selected.id); '>Edit Event</button>
+            </div>
+            <div class='col'>
+              <br>
+              <button (click)='edit = false' type="submit" class='btn btn-success'>Return</button>
+            </div>
+          </div>
+    </div>
+    <!-- End Update Event -->
+</div>
+<!-- End Container -->
